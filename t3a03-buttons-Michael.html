@@ -1,0 +1,69 @@
+
+
+<h3 align=center>t3a03-buttons-Michael</h3>
+
+use ctrl-shift-i for help <br>
+
+<input type=button value="first click" onclick="{
+  alert('Welcome to programming')
+  }"><br>
+
+
+<input type=text id="myText01" value="Trash"><br>
+<textarea id="myArea01" rows=4 cols=70></textarea>
+<br>
+
+
+
+
+<input type=button value="Input/Output" onclick="{
+  document.all.myArea01.value = document.all.myText01.value
+}"><br>
+
+
+<input type=button value="Variables" onclick="{
+  myX = 5
+  myWord = 'Dog'
+  //myArray[3] = 'Super'
+  document.all.myArea01.value = myX + ' * ' + myX + ' = ' + myX * myX
+}"><br>
+
+
+
+<input type=text id="myText02" value=5><br>
+<input type=text id="myText03" value=7><br>
+<input type=button value="Variables 2" onclick="{
+  myX = document.all.myText02.value
+  myY = document.all.myText03.value
+  document.all.myArea01.value = myX + ' * ' + myY + ' = ' + myX * myY
+}"><br>
+
+<input type=button value="Loop" onClick="{
+  for (myLoop = 1; myLoop <=100000; myLoop++){
+     alert('Hey')
+  }
+}">
+<br>
+
+<input type=button value="If/Else" onClick="{
+  myX = 3
+  if (myX == 3){
+     document.all.myArea01.value = 'Yes, myX does equal 3. It is ' + myX
+  } else {
+     document.all.myArea01.value = 'No, myX was ' + myX
+  }
+}">
+<br>
+
+<script>
+function myFun(myPass){
+   document.all.myArea01.value = myPass + ' I wanna die'
+}
+
+</script>
+
+
+<input type=button value="Functions" onclick="{
+   myPass = 'Really not fun,'
+   myFun(myPass)
+}">
