@@ -1,0 +1,72 @@
+<h1 align=center>All Javascript by Michael</h1>
+
+<script>
+function my01(){
+  document.all.myArea01.value = 'noice'
+}
+
+</script>
+
+<input type=text id="myText01" value="7"><br>
+<textarea id="myArea01" rows=4 cols=70></textarea><br>
+
+<input type=button value="Click First" onclick="{
+  my01()
+}"><br>
+
+
+<input type=button value="Input" onclick="{
+  document.all.myArea01.value = document.all.myText01.value
+}"><br>
+
+<input type=button value="Loop" onclick="{
+  document.all.myArea01.value = ''
+  for (x = 1; x <= 3; x++){
+     document.all.myArea01.value += x + ', '
+  }
+}"><br>
+
+
+<input type=button value="Decisions" onclick="{
+  myX = document.all.myText01.value
+  if (myX == 7){
+    document.all.myArea01.value = 'Yes'
+  } else {
+    document.all.myArea01.value = 'No'
+  }
+}"><br>
+
+
+<input type=button value="Arrays" onclick="{
+  myMax = 3
+  let myArray = []
+  myArray[1] = 'Michael'
+  myArray[2] = 'Davin'
+  myArray[3] = 'Simon'
+  document.all.myArea01.value = ''
+  document.all.myArea01.value = myArray[1] + ', ' + myArray[2] + ', ' + myArray[3]
+  }
+}"><br>
+
+
+<input type=button value="Events" onmouseover="{
+  document.all.myArea01.value = 'OY'
+}"><br>
+
+
+<input type=button value="Object" onclick="{
+ x = 3
+  let person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 50,
+    eyeColor: 'blue'
+  }
+    document.all.myArea01.value = 'person: '+ 'person.firstName is ' + person.firstName + ', person.lastName is ' + person.lastName + ', person.age is ' + person.age + ', person.eyeColor is ' + person.eyeColor
+}"><br>
+
+
+
+<input type=button value="Classes" onclick="{
+  document.all.myArea01.value = JSON.stringify(document, null, 3)
+}">
