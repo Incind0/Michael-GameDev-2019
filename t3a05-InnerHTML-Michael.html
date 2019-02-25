@@ -1,0 +1,82 @@
+<h1 align=center>InnerHTML by Michael</h1>
+
+<a href="http://www.tizag.com/javascriptT/javascript-innerHTML.php">Tizag innerHTML</a><br>
+
+x = <input type=text id="myText01" value=7>
+<div id="myDiv01">...</div>
+
+<input type=button value="text innerHTML" onclick="{
+  document.all.myDiv01.innerHTML = 
+  'Cool, <font color=red>but simple</font>'
+}"><br>
+
+
+<input type=button value="CSS Style" onclick="{
+  document.all.myDiv01.innerHTML = 
+'Cool, <font style=\'color:red; background-color:blue; \'>but still simple</font>'
+}"><br>
+
+
+<input type=button value="Image" onclick="{
+  myImg()
+}"><br>
+
+<script>
+function myImg()
+{
+   var ig = document.getElementById("myDiv01");
+   ig.innerHTML="<img src=\"https://steamuserimages-a.akamaihd.net/ugc/45369364728288691/B2919D4F23079C75AC10D1ECA585490A0A7FA962/\" width=\"400px\" height=\"150px\">";
+}
+</script>
+
+
+<input type=button value="Video" onclick="{
+  myVid()
+}"><br>
+
+<script>
+function myVid() 
+{
+   var em = document.getElementById("myDiv01");
+   em.innerHTML='<iframe width="560" height="315" src="https://www.youtube.com/embed/XePOXNIm1nk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+}
+</script>
+
+
+<input type=button value="Table" onclick="{
+  document.all.myDiv01.innerHTML =
+   `<table border=1>
+    <tr><td>This</td><td>is</td></tr>
+    <tr><td>a</td><td>table</td></tr>
+    </table>`
+}"><br>
+
+
+
+
+
+<script>
+function changeText(){
+	var myText01 = document.getElementById('myText01').value;
+	document.getElementById('myDiv01').innerHTML = myText01;
+}
+</script>
+
+
+<input type='button' onclick='changeText()' value='Change Text'/>
+
+<script>
+function textChangeRed(){
+   var ReddyB = document.getElementById('para').innerHTML;
+   var ReddyC = "<span style='color:#FF0000'>" + ReddyB + "</span>";
+   document.getElementById('para').innerHTML = ReddyC;
+}
+</script>
+<p id='para'>This is <id='Red'>red</p>
+<input type='button' onmouseover='textChangeRed()' value='Reddify'>
+
+
+
+
+
+
