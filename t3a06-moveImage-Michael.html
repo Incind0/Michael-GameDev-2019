@@ -1,0 +1,66 @@
+<h2 align=center>Move Image by Michael</h2>
+
+"Cookie Clicker"<br>
+
+<script>
+document.body.style.backgroundImage = "url('CookieClick.jfif')";
+</script>
+
+<input type=text value=0 onMouseOver="{
+  this.value = 'x = ' + document.getElementById('myImage01').style.left
+}"><br>
+<input type=text value=0 onMouseOver="{
+  this.value = 'y = ' + document.getElementById('myImage01').style.top
+}"><br>
+
+<table border=1>
+<tr><td><input type=button value="Up-Left" onclick="{
+   document.getElementById('myImage01').style.top =
+   parseInt(document.getElementById('myImage01').style.top) - 10
+   document.getElementById('myImage01').style.left = parseInt(document.getElementById('myImage01').style.left) - 10
+}"></td>
+<td><input type=button value="Up" onclick="{
+   document.getElementById('myImage01').style.top = 
+   parseInt(document.getElementById('myImage01').style.top) - 10
+}"></td>
+<td><input type=button value="Up-Right" onclick="{
+   document.getElementById('myImage01').style.top = 
+   parseInt(document.getElementById('myImage01').style.top) - 10
+   document.getElementById('myImage01').style.left = parseInt(document.getElementById('myImage01').style.left) + 10
+}"></td></tr><br>
+
+<tr><td><input type=button value="Left" onclick="{
+   document.getElementById('myImage01').style.left = parseInt(document.getElementById('myImage01').style.left) - 10
+}"></td>
+<td><input type=button value="Reset" onclick="{
+   document.getElementById('myImage01').style.top = 0
+   document.getElementById('myImage01').style.left = 0
+}"></td>
+<td><input type=button value="Right" onclick="{
+   document.getElementById('myImage01').style.left = parseInt(document.getElementById('myImage01').style.left) + 10
+}"></td></tr><br>
+
+<tr><td><input type=button value="Down-Left" onclick="{
+   document.getElementById('myImage01').style.top = 
+   parseInt(document.getElementById('myImage01').style.top) + 10
+   document.getElementById('myImage01').style.left = parseInt(document.getElementById('myImage01').style.left) - 10
+}"></td>
+<td><input type=button value="Down" onclick="{
+   document.getElementById('myImage01').style.top = 
+   parseInt(document.getElementById('myImage01').style.top) + 10
+}"></td>
+<td><input type=button value="Down-Right" onclick="{
+   document.getElementById('myImage01').style.top = 
+   parseInt(document.getElementById('myImage01').style.top) + 10
+   document.getElementById('myImage01').style.left = parseInt(document.getElementById('myImage01').style.left) + 10
+}"></td></tr>
+</table>
+
+<input type=text value=1 id=cookieClick><br>
+
+<img src="cookie.png" id="myImage01" 
+style="position:relative; display:block; left:0px; top:0px; height:100px; width:100px" onclick="{
+   document.all.cookieClick.value = Number(document.all.cookieClick.value) + 1
+   document.getElementById('myImage01').style.left = Math.random() * 300
+   document.getElementById('myImage01').style.top = Math.random() * 300
+}">
