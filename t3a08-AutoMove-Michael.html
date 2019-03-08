@@ -1,0 +1,56 @@
+<h2 align=center>Auto Move by Michael<h2>
+
+
+<img src="cookie.png" id="myImage01" 
+style="position:absolute; z-index: -1; display:block; left:0px; top:200px; height:100px; width:100px">
+
+
+<script> var dasLoop = 0 </script>
+
+<input type=button value="auto right" onclick="{
+   clearInterval(dasLoop)
+   dasLoop = setInterval(function(){
+      document.getElementById('myImage01').style.left = 
+      parseInt(document.getElementById('myImage01').style.left) + 10
+
+      if (parseInt(document.getElementById('myImage01').style.left) > 600){
+        document.getElementById('myImage01').style.left = '600' 
+      }
+   }, 60)
+}">
+
+<input type=button value="auto left" onclick="{
+   clearInterval(dasLoop)
+   dasLoop = setInterval(function(){
+      document.getElementById('myImage01').style.left = 
+      parseInt(document.getElementById('myImage01').style.left) - 10
+
+      if (parseInt(document.getElementById('myImage01').style.left) < 0){
+        document.getElementById('myImage01').style.left = '0' 
+      }
+   }, 60)
+}">
+
+<input type=button value="auto up" onclick="{
+   clearInterval(dasLoop)
+   dasLoop = setInterval(function(){
+      document.getElementById('myImage01').style.top = 
+      parseInt(document.getElementById('myImage01').style.top) - 10
+
+      if (parseInt(document.getElementById('myImage01').style.top) < 0){
+        document.getElementById('myImage01').style.top = '0' 
+      }
+   }, 60)
+}">
+
+<input type=button value="auto down" onclick="{
+   clearInterval(dasLoop)
+   dasLoop = setInterval(function(){
+      document.getElementById('myImage01').style.top = 
+      parseInt(document.getElementById('myImage01').style.top) + 10
+
+      if (parseInt(document.getElementById('myImage01').style.top) > 600){
+        document.getElementById('myImage01').style.top = '600' 
+      }
+   }, 60)
+}">
