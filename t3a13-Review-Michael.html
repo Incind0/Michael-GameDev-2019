@@ -1,0 +1,57 @@
+<body>
+
+<input type=textarea id="myText04" value=''>
+<script>
+   function myFunc(){for(x=1; x<=5; x++){
+      document.all.myText04.value += x;
+      x = x;
+      myFunc[x] = new Array();
+      myFunc[x] = x;
+      myFunc[x]
+      }
+   document.getElementById('myDiv01').innerHTML = `
+    <table border=1>
+      <tr><td> ${myFunc[1]} </td><td> ${myFunc[2]} </td><td> ${myFunc[3]} </td><td> ${myFunc[4]} </td><td> ${myFunc[5]} </td></tr>
+    </table>
+   `
+   }
+</script>
+
+
+
+<br><input type=button value=Review onclick="{
+   document.getElementById('myDiv01').innerHTML = `
+     <ol>
+      <li>Input-input type=button / Output-document.all.mydiv01.value</li>
+      <li>Variables-x=3</li>
+      <li>Decisions-If(){}</li>
+      <li>Loops-for(x=0; x<3; x++){}</li>
+      <li>Functions-function myFunc{}</li>
+      <li>Arrays-let Hello = [hi, hey, hello]</li>
+      <li>Events-onmouseclick</li>
+      <li>Objects-{name:Nicholas}</li>
+      <li>Classes</li>
+     </ol>`
+}"><br>
+
+<input type=button value='The Basics' onclick="{
+   document.getElementById('myDiv01').innerHTML = `
+     <input type=textarea id=myText01 value='Insert number, Mouse Over' onmouseover='{ document.all.myText02.value = document.all.myText01.value * document.all.myText01.value}'><br>
+     <input type=textarea id=myText02 value='...'><br>
+     <input type=textarea id=myText03 value='Are Both Equal?' onmouseover='{ if(document.all.myText01.value == document.all.myText02.value){document.all.myText03.value = true} else {document.all.myText03.value = false}}'>
+
+
+   `
+}"><br>
+
+<input type=button value='The Intermediate' onclick="{ 
+   myFunc()
+}"><br>
+
+<input type=button value='The Advanced' onclick="{
+   myObj={name:'Joe', age:46};
+   document.all.myText04.value = myObj.name + ', ' + myObj.age
+}">
+
+<div id="myDiv01">
+</body>
