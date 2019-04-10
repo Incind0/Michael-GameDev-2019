@@ -1,0 +1,159 @@
+<html>
+<head>
+<style>
+canvas {
+     border:1px solid;
+     background-color: #f1f1f1;
+}
+</style>
+</head>
+<body onload="gameStart()">
+<script>
+
+
+
+function gameStart() {
+   gameArea.start();
+   gamePong = new component(10, 10, "red", 190, 150);
+   gameCube1 = new component(5, 60, "black", 10, 120);
+   gameCube2 = new component(5, 65, "black", 380, 120);
+}
+
+var gameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 400;
+        this.canvas.height = 300;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateArea, 15);
+        window.addEventListener('keydown', function (e) {
+           gameArea.keys = (gameArea.keys || []);
+           gameArea.keys[e.keyCode] = true;
+        })
+        window.addEventListener('keyup', function (e) {
+           gameArea.keys[e.keyCode] = false;
+        })
+    },
+    clear : function() {
+       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+       
+}
+
+function component(width, height, color, x, y) {
+   this.width = width;
+   this.height = height;
+   this.x = x;
+   this.y = y;
+   this.speedX = 0;
+   this.speedY = 0;
+   this.speedX2 = 3;
+   this.speedY2 = 3;
+   this.update = function(){
+     ctx = gameArea.context;
+     ctx.fillStyle = color;
+     ctx.fillRect(this.x, this.y, this.width, this.height);
+   }
+   this.newPos = function() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.hitCanvas();
+   }
+   this.newPos2 = function() {
+      this.x += this.speedX2;
+      this.y += this.speedY2;
+      this.hitCanvas2();
+   }
+   this.hitCanvas = function() {
+     var canRit = gameArea.canvas.width - this.width;
+     var canLef = 0;
+     var canTop = 0;
+     var canBot = gameArea.canvas.height - this.height;
+     if(this.y > canBot)  {
+       this.y = canBot;
+     }
+     if(this.y < canTop)  {
+       this.y = canTop;
+     }
+     if(this.x > canRit)  {
+       this.x = canRit;
+     }
+     if(this.x < canLef)  {
+       this.x = canLef;
+     }
+   }
+this.hitCanvas2 = function() {
+     var canLef = gameArea.canvas.width - this.width;
+     var canRit = 0;
+     var canTop = 0;
+     var canBot = gameArea.canvas.height - this.height;
+     if(this.y > canBot)  {
+       this.y = canBot;
+       this.speedY2 = -(this.speedY2);
+     }
+     if(this.y < canTop)  {
+       this.y = canTop;
+       this.speedY2 = -(this.speedY2);
+     }
+     if(this.x < canRit)  {
+       this.x = canRit;
+       gamePong.reset();
+     }
+     if(this.x > canLef)  {
+       this.x = canLef;
+       gamePong.reset();
+     }
+   }
+  this.crashWith = function(otherobj) {
+    var myleft = this.x;
+    var myright = this.x + (this.width);
+    var mytop = this.y;
+    var mybottom = this.y + (this.height);
+    var otherleft = otherobj.x;
+    var otherright = otherobj.x + (otherobj.width);
+    var othertop = otherobj.y;
+    var otherbottom = otherobj.y + (otherobj.height); 
+    var hit = false
+    if ((mytop > otherbottom) ||
+    (mybottom < othertop) ||
+    (myright < otherleft) ||
+    (myleft > otherright)) {
+       hit = true;
+    }
+    else {
+       hit = false
+    }
+    return hit;
+  }
+  this.reset = function() {
+    this.y = 100;
+    this.x = 190;
+  }
+}
+
+function updateArea() {
+   gameArea.clear();
+   gameCube1.speedX = 0;
+   gameCube1.speedY = 0;
+   gameCube2.speedX = 0;
+   gameCube2.speedY = 0;
+   if (gameCube1.crashWith(gamePong)) { gamePong.speedX2 = -(gamePong.speedX2); }
+   if (gameCube2.crashWith(gamePong)) { gamePong.speedX2 = -(gamePong.speedX2); }
+   if (gameArea.keys && gameArea.keys[87]) {gameCube1.speedY = -2; }
+   if (gameArea.keys && gameArea.keys[83]) {gameCube1.speedY = 2; }
+   if (gameArea.keys && gameArea.keys[38]) {gameCube2.speedY = -2; }
+   if (gameArea.keys && gameArea.keys[40]) {gameCube2.speedY = 2; }
+   gamePong.newPos2();
+   gameCube1.newPos();
+   gameCube2.newPos();
+   gamePong.update();
+   gameCube1.update();
+   gameCube2.update();
+}
+
+
+</script>
+
+
+
