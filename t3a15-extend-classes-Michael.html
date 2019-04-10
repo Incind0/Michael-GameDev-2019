@@ -1,0 +1,33 @@
+<input id="myButton131" type="button" value="Extend a Class" onclick="{
+class myGem {
+   constructor(passName, passDate) {
+      this.myName = passName;
+      this.myDate = passDate;
+   }
+   myShow(){
+      document.getElementById('myDiv131').innerHTML = 'hello '+ this.myName + '. you are ' + this.myAge + ' years old<br>'
+   }
+}
+
+class myGame extends myGem {
+
+    myShow(){
+      document.getElementById('myDiv131').innerHTML = this.myName + ' made pong on the ' + this.myDate + 'th of April'
+    }
+}
+
+
+
+
+
+   myPong = new myGame('Michael', 08)
+   myPong.myShow()
+
+}"<br><br>
+
+<div id='myDiv131'>...</div><br>
+
+
+
+
+
