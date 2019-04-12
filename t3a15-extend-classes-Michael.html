@@ -1,3 +1,13 @@
+<script>
+function construct(myName, myNumber) {
+   this.myName = document.all.myText01.value;
+   this.myNumber = document.all.myText02.value;
+}
+
+</script>
+
+
+
 <input id="myButton131" type="button" value="Extend a Class" onclick="{
 class myGem {
    constructor(passName, passDate) {
@@ -23,7 +33,15 @@ class myGame extends myGem {
    myPong = new myGame('Michael', 08)
    myPong.myShow()
 
-}"<br><br>
+}"<br><br><br>
+
+<input id="myButton130" type="button" value="Extend a Class 2" onclick="{
+   var myCreate = new construct();
+   document.getElementById('myDiv131').innerHTML = myCreate.myName + ' did assignment ' + myCreate.myNumber;
+}"><br>
+
+<input type=textarea id='myText01' placeholder='Type Name'><br>
+<input type=textarea id='myText02' placeholder='Type Number'><br>
 
 <div id='myDiv131'>...</div><br>
 
