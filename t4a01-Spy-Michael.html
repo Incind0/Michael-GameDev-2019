@@ -1,0 +1,96 @@
+<h1 align=center> Encryption </h1>
+<textarea id="myArea01" rows=4 cols=70>Has made pong better</textarea><br>
+
+<script>
+
+String.prototype.normalise_to_ascii   = function(){return unescape(encodeURIComponent(this)); }
+String.prototype.normalise_to_unicode = function(){return decodeURIComponent(escape(this));   }
+
+String.prototype.crypt_symmetric = function(key){
+  var me = this + "";   
+
+  key = Number(String(Number(key))) === key ? Number(key) : 13; 
+
+  me = me.split('')                                              
+         .map(function(c){return c.charCodeAt(0);})
+         .map(function(i){return i ^ key;        })
+         ;
+  me = String.fromCharCode.apply(undefined, me);
+  return me;
+};
+
+</script>
+<input type=button value="encrypt" onclick="{
+   let myTemp = ''
+   myString = document.getElementById('myArea01').value.toLowerCase().split('')
+   for (let myLoop=0; myLoop < myString.length; myLoop++){
+      myTemp = myString[myLoop]
+      if(myString[myLoop] == 'e') {myTemp = 'f'}
+      if(myString[myLoop] == 'h') {myTemp = 'i'}
+
+
+
+      myString[myLoop] = myTemp
+   }
+
+   document.getElementById('myArea02').value = myString.join('')
+}"><br><br>
+
+<textarea id="myArea02" rows=4 cols=70></textarea><br>
+
+<input type=button value="decrypt" onclick="{
+   let myTemp = ''
+   myString = document.getElementById('myArea02').value.toLowerCase().split('')
+   for (let myLoop=0;   myLoop < myString.length; myLoop++){
+      myTemp = myString[myLoop]
+
+
+      if (myString[myLoop] == 'f') {myTemp  = 'e'}
+ 
+      if (myString[myLoop] == 'i') {myTemp  = 'h'} 
+
+
+
+      myString[myLoop] = myTemp
+   }
+
+   document.getElementById('myArea03').value = myString.join('')
+}"><br><br>
+
+<textarea id="myArea03" rows=4 cols=70></textarea><br>
+
+<input type=button value="using ascii numbers encrypt" onclick="{
+  let myString = document.getElementById('myArea01').value.toLowerCase()
+  let myTemp = ''
+   for (let x=0; x < myString.length; x++) {
+      myTemp += String.fromCharCode(myString.charCodeAt(x)+1)
+   }
+   document.getElementById('myArea02').value = myTemp
+}"><br>
+
+<input type=button value="using ascii numbers decrypt" onclick="{
+  let myString = document.getElementById('myArea02').value.toLowerCase()
+  let myTemp = ''
+   for (let x=0; x < myString.length; x++) {
+      myTemp += String.fromCharCode(myString.charCodeAt(x)-1)
+   }
+   document.getElementById('myArea03').value = myTemp
+}"><br><br>
+
+
+<input type=button value="Encrypt 1" onclick="{
+   document.getElementById('myArea02').value = document.getElementById('myArea01').value.crypt_symmetric();
+}"><br>
+
+<input type=button value="Decrypt 1" onclick="{
+   document.getElementById('myArea03').value = document.getElementById('myArea02').value.crypt_symmetric();
+}"><br><br>
+
+
+<input type=button value="Encrypt 2" onclick="{
+   
+}"><br>
+
+<input type=button value="Decrypt 2" onclick="{
+   
+}"><br><br>
