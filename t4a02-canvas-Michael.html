@@ -1,0 +1,144 @@
+<h2 align=center>Basic Canvas drawing</h2>
+
+You use loops and variables to make fast fancy drawings <br><br>
+
+<canvas id="myCoolTag" width="1000" height="600" style="border:1px solid #000000;"></canvas>
+
+<script>
+
+function myLoop1() {
+   myContext.translate(400, 100);  // move rotation point from 0,0
+   myContext.rotate(x * 30 * Math.PI / 180); // 60 in degrees
+
+   myContext.fillText('Death to the World', 10, 10);
+   myContext.stroke();
+
+   myContext.resetTransform();  // move rotation point from 0,0
+   x += 1;
+}
+
+function myLoop2() {
+   myContext.translate(200, 300);  // move rotation point from 0,0
+   myContext.rotate(x * 30 * Math.PI / 180); // 60 in degrees
+
+   myContext.fillText('Death to the World', 10, 10);
+   myContext.stroke();
+
+   myContext.resetTransform();  // move rotation point from 0,0
+   x += 1;
+}
+
+function myLoop3() {
+   myContext.translate(600, 200);  // move rotation point from 0,0
+   myContext.rotate(x * 30 * Math.PI / 180); // 60 in degrees
+
+   myContext.fillText('Death to the World', 10, 10);
+   myContext.stroke();
+
+   myContext.resetTransform();  // move rotation point from 0,0
+   x += 1;
+}
+
+   // set up global variables
+   let myCanvas=document.getElementById('myCoolTag');
+   let myContext=myCanvas.getContext('2d');
+
+</script>
+
+<input type=button value=".lineTo(30,200)" onclick="{
+   myContext.beginPath();
+   myContext.lineWidth = 1;   
+   myContext.moveTo(20,10);
+   myContext.lineTo(30,200);
+   myContext.stroke();
+
+}">
+
+
+<input type=button value=".arc(95, 50, 40, 0, 2 * Math.PI)" onclick="{
+   myContext.beginPath();
+   myContext.lineWidth = 10;
+   myContext.strokeStyle = 'green';
+   myContext.arc(95, 50, 40, 0, 2 * Math.PI);
+   myContext.stroke();
+
+}">
+
+
+<input type=button value=".fillText('Hello World', 400, 100)" onclick="{
+
+   myContext.font = '20px Arial';
+   myContext.fillText('Hello World', 400, 100);
+
+   myContext.translate(400, 100);  // move rotation point from 0,0
+   myContext.rotate(60 * Math.PI / 180); // 60 in degrees
+
+   myContext.fillText('Hello World', 10, 10);
+   myContext.stroke();
+
+   myContext.resetTransform();  // move rotation point from 0,0
+}">
+
+<input type=button value=".quadraticCurveTo(100,220,240,110)" onclick="{
+   myContext.beginPath();
+   myContext.moveTo(300,100);
+   myContext.quadraticCurveTo(100,220,240,110);
+   myContext.stroke();
+
+}">
+
+
+<input type=button value=".createLinearGradient(100, 300, 200, 400)" onclick="{
+   let myGradient = myContext.createLinearGradient(100, 300, 200, 400);
+   myGradient.addColorStop(0, 'red');
+   myGradient.addColorStop(0.5, 'blue');
+   myGradient.addColorStop(1, 'yellow');
+
+   myContext.fillStyle = myGradient;
+   myContext.fillRect(100, 300, 200, 400);
+
+   myContext.fillStyle = 'black';
+}">
+
+<br><br>
+
+<input type=button value="clearRect(20, 20, 50, 50)" onclick="{
+   myContext.clearRect(20, 20, 50, 50);
+}">
+
+
+<input type=button value="Clear all" onclick="{
+   myContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
+}">
+
+
+<br><br>
+
+<input type=button value="Firework" onclick="{
+   myContext.beginPath();
+   myContext.lineWidth = 1;   
+   myContext.moveTo(100,100);
+   for(x=1; x < 11; x++) {
+     myContext.lineTo((150 + (10 * x)), (150 - (10 * x)));
+     myContext.stroke();
+     myContext.moveTo(100,100);
+   }
+}">                                                                          
+
+<input type=button value=".fillText('Death to the World', 400, 100) Loop" onclick="{
+  for(x=1; x < 13; x++) {
+   setTimeout(myLoop1, (x * 1000)); 
+  }
+
+  for(x=1; x < 13; x++) {
+   setTimeout(myLoop2, (x * 1000));
+  }
+
+  for(x=1; x < 13; x++) {
+   setTimeout(myLoop3, (x * 1000));
+  }
+
+}">
+
+
+
