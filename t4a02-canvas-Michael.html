@@ -25,7 +25,7 @@ function myLoop2() {
    myContext.stroke();
 
    myContext.resetTransform();  // move rotation point from 0,0
-   x += 1;
+
 }
 
 function myLoop3() {
@@ -36,7 +36,7 @@ function myLoop3() {
    myContext.stroke();
 
    myContext.resetTransform();  // move rotation point from 0,0
-   x += 1;
+
 }
 
    // set up global variables
@@ -127,15 +127,15 @@ function myLoop3() {
 
 <input type=button value=".fillText('Death to the World', 400, 100) Loop" onclick="{
   for(x=1; x < 13; x++) {
-   setTimeout(myLoop1, (x * 1000)); 
+   setTimeout(myLoop1, (x * 200)); 
   }
 
   for(x=1; x < 13; x++) {
-   setTimeout(myLoop2, (x * 1000));
+   setTimeout(myLoop2, (x * 200));
   }
 
   for(x=1; x < 13; x++) {
-   setTimeout(myLoop3, (x * 1000));
+   setTimeout(myLoop3, (x * 200));
   }
 
 }">
