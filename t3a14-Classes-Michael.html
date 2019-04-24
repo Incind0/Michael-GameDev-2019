@@ -2,6 +2,8 @@
 
 <input id="myButton130" type="button" value="Make and Show the class myAnimal" onclick="{
 
+
+
  class myAnimal {
    constructor(passName, passAge) {
       this.myName = passName;
@@ -13,10 +15,24 @@
 }
   myDog = new myAnimal('Snickers', 5)
   myDog.myShow()
-}"<br><br>
+}"><br><br>
 <div id='myDiv130'>...</div><br>
 
-<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+<script src='https://code.responsivevoice.org/responsivevoice.js'>
+
+
+
+</script>
+
+<script>
+function construct(myName, myNumber) {
+   this.myName = document.all.myText04.value;
+   this.myNumber = document.all.myText05.value;
+}
+
+
+</script>
+
 
 <input type="button" value="Use ResponsiveCode" onclick="{
      responsiveVoice.speak('I made Pong')
@@ -28,3 +44,17 @@
 'US English Female',
 {pitch: 1, rate: 1, volume: 1})
 }"><br><br>
+
+
+<input id="myButton131" type="button" value="Extend a Class 2" onclick="{
+   var myCreate = new construct();
+   document.getElementById('myDiv131').innerHTML = myCreate.myName + ' did assignment ' + myCreate.myNumber;
+}"><br>
+
+<input type=textarea id='myText04' placeholder='Type Name'><br>
+<input type=textarea id='myText05' placeholder='Type Number'><br>
+
+<div id='myDiv131'>...</div><br>
+
+
+
