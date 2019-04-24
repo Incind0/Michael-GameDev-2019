@@ -71,12 +71,18 @@ function textChangeRed(){
    var ReddyC = "<span style='color:#FF0000'>" + ReddyB + "</span>";
    document.getElementById('para').innerHTML = ReddyC;
 }
+
+function buttonDupe(){
+   document.all.myDiv02.innerHTML += `<input type=button value='Duplicate' onmouseover='buttonDupe()'><br>`
+}
 </script>
 <p id='para'>This is <id='Red'>red</p>
-<input type='button' onmouseover='textChangeRed()' value='Reddify'>
+<input type='button' onmouseover='textChangeRed()' value='Reddify'><br>
 
 
+<input type=button value='Duplicate' onmouseover='buttonDupe()'><br>
 
+<div id="myDiv02"></div>
 
 
 
