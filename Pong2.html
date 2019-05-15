@@ -1,0 +1,288 @@
+<html>
+<head>
+<style>
+canvas {
+     border:1px solid;
+     background-color: #f1f1f1;
+}
+</style>
+</head>
+<body onload="gameStart()">
+<script>
+
+var myScore;
+
+function Random1() {
+   gamePong.randomX = Math.round(4 * Math.random() + 3);
+   gamePong.randomY = Math.round((9 * Math.random()) - 4.5);
+}
+
+
+function Random2() {
+   gamePong.randomX = Math.round((4 * Math.random()) - 7);
+   gamePong.randomY = Math.round((9 * Math.random()) - 4.5);
+}
+
+function Random3() {
+   gamePong.randomX = Math.round((8 * Math.random()) - 4);
+   gamePong.randomY = Math.round((9 * Math.random()) - 4.5);
+}
+
+
+function gameStart() {
+   gameArea.start();
+   gamePong = new component(10, 10, "black", 190, 150);
+   Random3();
+   gamePong.speedX2 = gamePong.randomX;
+   gamePong.speedY2 = gamePong.randomY;
+   gameCube1 = new component(5, 65, "red", 10, 120);
+   gameCube2 = new component(5, 65, "green", 380, 120);
+   gameObs1 = new component(2, 0, "red", 110, 50);
+   gameObs2 = new component(2, 0, "green", 280, 210);
+   myScore1 = new component("30px", "Consolas", "red", 140, 20, "text");
+   myScore2 = new component("30px", "Consolas", "green", 240, 20, "text");
+}
+
+var gameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 400;
+        this.canvas.height = 300;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateArea, 15);
+        window.addEventListener('keydown', function (e) {
+           gameArea.keys = (gameArea.keys || []);
+           gameArea.keys[e.keyCode] = true;
+        })
+        window.addEventListener('keyup', function (e) {
+           gameArea.keys[e.keyCode] = false;
+        })
+    },
+    clear : function() {
+       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop : function() {
+      clearInterval(this.interval);
+    }
+}
+
+function component(width, height, color, x, y, type) {
+   this.type = type;
+   this.width = width;
+   this.height = height;
+   this.x = x;
+   this.y = y;
+   this.speedX = 0;
+   this.speedY = 0;
+   this.speedX2 = -3;
+   this.speedY2 = 0;
+   this.speedY3 = 3;
+   this.speedY4 = -3;
+   this.scored1 = 0;
+   this.scored2 = 0;
+   this.update = function(){
+     ctx = gameArea.context;
+     if (this.type == "text") {
+       ctx.font = this.width + " " + this.height;
+       ctx.fillStyle = color;
+       ctx.fillText(this.text, this.x, this.y);
+     } else {
+     ctx.fillStyle = color;
+     ctx.fillRect(this.x, this.y, this.width, this.height);
+     }
+   }
+   this.newPos = function() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.hitCanvas();
+   }
+   this.newPos2 = function() {
+      this.x += this.speedX2;
+      this.y += this.speedY2;
+      this.hitCanvas2();
+   }
+   this.newPos3 = function() {
+      this.x += this.speedX;
+      this.y += this.speedY3;
+      this.hitCanvas3();
+   }
+   this.newPos4 = function() {
+      this.x += this.speedX;
+      this.y += this.speedY4;
+      this.hitCanvas4();
+   }
+   this.hitCanvas = function() {
+     var canRit = gameArea.canvas.width - this.width;
+     var canLef = 0;
+     var canTop = 0;
+     var canBot = gameArea.canvas.height - this.height;
+     if(this.y > canBot)  {
+       this.y = canBot;
+     }
+     if(this.y < canTop)  {
+       this.y = canTop;
+     }
+     if(this.x > canRit)  {
+       this.x = canRit;
+     }
+     if(this.x < canLef)  {
+       this.x = canLef;
+     }
+   }
+this.hitCanvas2 = function() {
+     var canLef = gameArea.canvas.width - this.width;
+     var canRit = 0;
+     var canTop = 0;
+     var canBot = gameArea.canvas.height - this.height;
+     if(this.y > canBot)  {
+       this.y = canBot;
+       this.speedY2 = -(this.speedY2);
+     }
+     if(this.y < canTop)  {
+       this.y = canTop;
+       this.speedY2 = -(this.speedY2);
+     }
+     if(this.x < canRit)  {
+       this.x = canRit;
+       gamePong.reset();
+       gamePong.angle1();
+       gamePong.speedX2 = 3
+       gamePong.speedY2 = gamePong.randomY;
+       clearInterval(Random1());
+       this.scored2 += 1;
+       gameObs1.height += 8;
+     }
+     if(this.x > canLef)  {
+       this.x = canLef;
+       gamePong.reset();
+       gamePong.angle2();
+       gamePong.speedX2 = -3
+       gamePong.speedY2 = gamePong.randomY;
+       clearInterval(Random2());
+       this.scored1 += 1;
+       gameObs2.height += 8;
+     }
+   }
+this.hitCanvas3 = function() {
+     var canLef = gameArea.canvas.width - this.width;
+     var canRit = 0;
+     var canTop = 0;
+     var canBot = gameArea.canvas.height - this.height;
+     if(this.y > canBot)  {
+       this.y = canBot;
+       this.speedY3 = -(this.speedY3);
+     }
+     if(this.y < canTop)  {
+       this.y = canTop;
+       this.speedY3 = -(this.speedY3);
+     }
+   }
+this.hitCanvas4 = function() {
+     var canLef = gameArea.canvas.width - this.width;
+     var canRit = 0;
+     var canTop = 0;
+     var canBot = gameArea.canvas.height - this.height;
+     if(this.y > canBot)  {
+       this.y = canBot;
+       this.speedY4 = -(this.speedY4);
+     }
+     if(this.y < canTop)  {
+       this.y = canTop;
+       this.speedY4 = -(this.speedY4);
+     }
+   }
+  this.crashWith = function(otherobj) {
+    var myleft = this.x;
+    var myright = this.x + (this.width);
+    var mytop = this.y;
+    var mybottom = this.y + (this.height);
+    var otherleft = otherobj.x;
+    var otherright = otherobj.x + (otherobj.width);
+    var othertop = otherobj.y;
+    var otherbottom = otherobj.y + (otherobj.height); 
+    var hit = true;
+    if ((mytop > otherbottom) ||
+    (mybottom < othertop) ||
+    (myright < otherleft) ||
+    (myleft > otherright)) {
+       hit = false;
+    }
+    else {
+       hit = true;
+    }
+    return hit;
+  }
+  this.reset = function() {
+    this.x = 190;
+  }
+
+  this.angle1 = function() {
+    setInterval(Random1(), 0.1);
+  }
+
+  this.angle2 = function() {
+    setInterval(Random2(), 0.1);
+  }
+
+}
+
+
+
+function updateArea() {
+   
+   gameArea.clear();
+   gameCube1.speedX = 0;
+   gameCube1.speedY = 0;
+   gameCube2.speedX = 0;
+   gameCube2.speedY = 0;
+   if (gamePong.crashWith(gameCube1)) { 
+      gamePong.angle1(); 
+      gamePong.speedX2 = gamePong.randomX;
+      gamePong.speedY2 = gamePong.randomY;
+      clearInterval(Random1());
+   }
+   if (gamePong.crashWith(gameCube2)) { 
+      gamePong.angle2();
+      gamePong.speedX2 = gamePong.randomX;
+      gamePong.speedY2 = gamePong.randomY;
+      clearInterval(Random2());
+   }
+   if (gamePong.crashWith(gameObs1)) { 
+      gamePong.angle1(); 
+      gamePong.speedX2 = gamePong.randomX;
+      gamePong.speedY2 = gamePong.randomY;
+      clearInterval(Random1());
+   }
+   if (gamePong.crashWith(gameObs2)) { 
+      gamePong.angle2();
+      gamePong.speedX2 = gamePong.randomX;
+      gamePong.speedY2 = gamePong.randomY;
+      clearInterval(Random2());
+   }
+   if (gameArea.keys && gameArea.keys[87]) {gameCube1.speedY = -4; }
+   if (gameArea.keys && gameArea.keys[83]) {gameCube1.speedY = 4; }
+   if (gameArea.keys && gameArea.keys[38]) {gameCube2.speedY = -4; }
+   if (gameArea.keys && gameArea.keys[40]) {gameCube2.speedY = 4; }
+   myScore1.text = gamePong.scored1;
+   myScore2.text = gamePong.scored2;
+   if ((gamePong.scored1 == 10) || (gamePong.scored2 == 10)) { location = "https://www.google.com/" }
+   gamePong.newPos2();
+   myScore1.update();
+   myScore2.update();
+   gameCube1.newPos();
+   gameCube2.newPos();
+   gameObs1.newPos3();
+   gameObs2.newPos4();
+   gamePong.update();
+   gameCube1.update();
+   gameCube2.update();
+   gameObs1.update();
+   gameObs2.update();
+}
+
+
+</script>
+
+
+
